@@ -10,9 +10,19 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+        matrix:
+            platform:
+                - arm64
+                - s390x
+                - ppc64le
+                - x86_64
+                - i386
 
     steps:
     - uses: actions/checkout@v4
+    - uses: docker/setup-qemu-action@v3
+    - uses: docker/setup-buildx-action@v3
     - name: install dependencies
       run: sudo apt-get install git wget patch make gcc g++ liblzo2-dev libsnappy-dev libzstd-dev texinfo bison flex -y
     - name: compile
