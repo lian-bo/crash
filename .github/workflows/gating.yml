@@ -1,0 +1,23 @@
+name: C/C++ CI gating
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: install dependencies
+      run: sudo apt-get install git wget patch make gcc g++ liblzo2-dev libsnappy-dev libzstd-dev texinfo bison flex -y
+    - name: compile
+      run: make -j`nproc` lzo zstd snappy
+    - name: cleanup
+      run: make clean
+    - name: check warning
+      run: make -j`nproc` warn lzo zstd snappy
