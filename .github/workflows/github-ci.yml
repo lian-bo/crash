@@ -1,9 +1,9 @@
 name: Build Crash-utility
 on:
   push:
-    branches: [ "master-next" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "master-next" ]
+    branches: [ "master" ]
 jobs:
   x86_64:
     runs-on: ubuntu-latest
