@@ -20,7 +20,7 @@ jobs:
       - name: install tools
         run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
       - name: make
-        run: make -j$(nproc) Warn lzo zstd snappy TARGET=ARM64
+        run: TARGET=ARM64 make -j$(nproc) Warn lzo zstd snappy
   PPC64:
     runs-on: ubuntu-latest
     steps:
@@ -28,7 +28,7 @@ jobs:
       - name: install tools
         run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
       - name: make
-        run: make -j$(nproc) Warn lzo zstd snappy TARGET=PPC64
+        run: TARGET=PPC64 make -j$(nproc) Warn lzo zstd snappy
   S390X:
     runs-on: ubuntu-latest
     steps:
@@ -36,7 +36,7 @@ jobs:
       - name: install tools
         run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
       - name: make
-        run: make -j$(nproc) Warn lzo zstd snappy TARGET=S390X
+        run: TARGET=S390X make -j$(nproc) Warn lzo zstd snappy
   X86:
     runs-on: ubuntu-latest
     steps:
@@ -44,4 +44,4 @@ jobs:
       - name: install tools
         run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
       - name: make
-        run: make -j$(nproc) Warn lzo zstd snappy TARGET=X86
+        run: TARGET=X86 make -j$(nproc) Warn lzo zstd snappy
