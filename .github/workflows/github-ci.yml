@@ -8,7 +8,7 @@ jobs:
   x86_64:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout
       - name: install tools
         run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
       - name: make
@@ -16,7 +16,7 @@ jobs:
   aarch64:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout
       - name: install tools
         run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
       - name: make
@@ -24,7 +24,7 @@ jobs:
   ppc64le:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout
       - name: install tools
         run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
       - name: make
@@ -32,7 +32,7 @@ jobs:
   s390x:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout
       - name: install tools
         run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
       - name: make
