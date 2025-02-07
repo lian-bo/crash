@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: install tools
+      - name: install deps
         run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
       - name: make
         run: make -j$(nproc) warn lzo zstd snappy
@@ -17,31 +17,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: install tools
+      - name: install deps
         run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
       - name: make
-        run: target=ARM64 make -j$(nproc) warn lzo zstd snappy
+        run: make target=ARM64 -j$(nproc) warn lzo zstd snappy
   PPC64:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: install tools
+      - name: install deps
         run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
       - name: make
-        run: target=PPC64 make -j$(nproc) warn lzo zstd snappy
+        run: make target=PPC64 -j$(nproc) warn lzo zstd snappy
   S390X:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: install tools
+      - name: install deps
         run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
       - name: make
-        run: target=S390X make -j$(nproc) warn lzo zstd snappy
+        run: make target=S390X -j$(nproc) warn lzo zstd snappy
   X86:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: install tools
+      - name: install deps
         run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
       - name: make
-        run: target=X86 make -j$(nproc) warn lzo zstd snappy
+        run: make target=X86 -j$(nproc) warn lzo zstd snappy
