@@ -24,7 +24,7 @@ jobs:
       - uses: actions/checkout@v4
 
   arm64:
-    runs-on: arm64v8/ubuntu
+    runs-on: ubuntu
     container: arm64v8/ubuntu
     steps:
       - uses: actions/checkout@v3
