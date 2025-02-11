@@ -7,22 +7,33 @@ on:
 jobs:
   X86_64:
     runs-on: ubuntu-latest
-    container: amd64/fedora
+    container: amd64/ubuntu
     steps:
       - uses: actions/checkout@v4
+      - name: install qemu pkgs
+        run: sudo apt-get install qemu binfmt-support qemu-user-static
+      - name: execut the registring script
+        run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+      - name: test arch
+        run: docker run --platform=linux/amd64 --rm -t amd64/ubuntu uname -m
       - name: install deps
-        run: dnf install -y git make gcc gcc-c++ glibc bc bison lzo-devel snappy-devel libzstd-devel wget texinfo flex ncurses-devel patch
+        run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
       - name: echo "uname -a"
         run: uname -a
 
   arm64:
     runs-on: ubuntu-latest
-    container: arm64v8/fedora
+    container: arm64v8/ubuntu
     steps:
-      - uses: docker/setup-buildx-action@v2
-      - uses: docker/setup-qemu-action@v3
       - uses: actions/checkout@v4
+      - name: install qemu pkgs
+        run: sudo apt-get install qemu binfmt-support qemu-user-static
+      - name: execut the registring script
+        run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+      - name: test arch
+        run: docker run --platform=linux/arm64v8 --rm -t arm64v8/ubuntu uname -m
       - name: install deps
-        run: dnf install -y git make gcc gcc-c++ glibc bc bison lzo-devel snappy-devel libzstd-devel wget texinfo flex ncurses-devel patch
+        run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
       - name: echo "uname -a"
         run: uname -a
+
