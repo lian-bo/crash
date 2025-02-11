@@ -19,13 +19,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: install qemu pkgs
-        run: sudo apt-get install binfmt-support qemu-user-static
+        run: sudo apt-get install binfmt-support qemu-user-static coreutils
       - name: change mod
         run: sudo chmod +x /usr/bin/qemu-aarch64-static
       - name: docker run
         run: sudo docker run --rm --privileged multiarch/qemu-user-static:register --reset
       - name: docker run 2...
-        run: docker run --platform=linux/arm64/v8 --rm -t arm64v8/ubuntu uname -m
+        run: docker run --platform=linux/arm64/v8 --rm -t arm64v8/ubuntu
       - name: install deps
         run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
       - name: echo "uname -a"
