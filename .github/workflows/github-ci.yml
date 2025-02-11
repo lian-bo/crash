@@ -19,6 +19,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: install qemu pkgs
+        run: sudo apt-get install qemu binfmt-support qemu-user-static
+      - name: fetch qemu aarch64 static tarball
         run: sudo wget https://github.com/multiarch/qemu-user-static/releases/download/v7.2.0-1/qemu-aarch64-static.tar.gz
       - name: uncompress tarball
         run: sudo tar -zxvf qemu-aarch64-static.tar.gz
@@ -27,7 +29,7 @@ jobs:
       - name: change mod
         run: sudo chmod +x /usr/bin/qemu-aarch64-static
       - name: docker run
-        run: sudo docker run --rm --privileged multiarch/qemu-user-static:register --reset
+        run: sudo docker run --rm --privileged multiarch/qemu-user-static:register --reset -p yes
       - name: docker run 2...
         run: sudo docker run -t -v /usr/bin/qemu-aarch64-static:/usr/bin/qemu-aarch64-static arm64v8/ubuntu:latest
       - name: install deps
