@@ -6,7 +6,7 @@ on:
     branches: [ "master" ]
 jobs:
   X86_64:
-    runs-on: fedora
+    runs-on: fedora-latest
     container: amd64/fedora
     steps:
       - name: set up qemu
