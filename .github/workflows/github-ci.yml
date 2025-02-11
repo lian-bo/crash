@@ -6,8 +6,20 @@ on:
     branches: [ "master" ]
 jobs:
   X86_64:
-    runs-on: fedora-latest
-    container: amd64/fedora
+    runs-on: ubuntu-latest
+    container: linux/amd64
+    steps:
+      - name: set up qemu
+        uses: docker/setup-qemu-action@v3
+      - uses: actions/checkout@v4
+      - name: install deps
+        run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
+      - name: echo "uname -a"
+        run: uname -a
+
+  arm64:
+    runs-on: ubuntu-latest
+    container: linux/arm64
     steps:
       - name: set up qemu
         uses: docker/setup-qemu-action@v3
