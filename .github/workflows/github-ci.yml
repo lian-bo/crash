@@ -19,6 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     container: arm64v8/ubuntu
     steps:
+      - uses: docker/setup-qemu-action@v3
       - uses: actions/checkout@v4
       - name: install deps
         run: dnf install -y git make gcc gcc-c++ glibc bc bison lzo-devel snappy-devel libzstd-devel wget texinfo flex ncurses-devel patch
