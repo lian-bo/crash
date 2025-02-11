@@ -29,7 +29,7 @@ jobs:
       - name: docker run
         run: sudo docker run --rm --privileged multiarch/qemu-user-static:register --reset
       - name: docker run 2...
-        run: sudo docker run -t -v /usr/bin/qemu-aarch64-static:/usr/bin/qemu-aarch64-static arm64v8/ubuntu:latest uname -m
+        run: sudo docker run -t -v /usr/bin/qemu-aarch64-static:/usr/bin/qemu-aarch64-static arm64v8/ubuntu:latest
       - name: install deps
         run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
       - name: echo "uname -a"
