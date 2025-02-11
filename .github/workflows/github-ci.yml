@@ -9,8 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     container: amd64/fedora
     steps:
-      - name: set up qemu
-        uses: docker/setup-qemu-action@v3
       - uses: actions/checkout@v4
       - name: install deps
         run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
