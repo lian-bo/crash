@@ -24,18 +24,18 @@ jobs:
       - uses: actions/checkout@v4
 
   arm64:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-2vcpu-ubuntu-2204-arm
     container: arm64v8/ubuntu
     steps:
-      - name: set up qemu
-        uses: docker/setup-qemu-action@v3
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          platforms: linux/arm64
       - name: install qemu pkgs
         run: apt-get install qemu binfmt-support qemu-user-static
-      - name: execut the registring script
-        run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-      - name: test arch
-        run: docker run --platform=linux/arm64v8 --rm -t arm64v8/ubuntu uname -m
       - name: install deps
         run: apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
       - name: echo "uname -a"
