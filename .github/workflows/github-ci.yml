@@ -25,7 +25,7 @@ jobs:
       - name: docker run
         run: sudo docker run --rm --privileged multiarch/qemu-user-static:register --reset
       - name: docker run 2...
-        run: docker run --platform=linux/arm64/v8 --rm -t arm64v8/ubuntu nproc
+        run: docker run --platform=linux/arm64/v8 --rm -t arm64v8/ubuntu docker ps
       - name: install deps
         run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
       - name: echo "uname -a"
