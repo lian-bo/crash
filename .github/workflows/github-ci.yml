@@ -21,8 +21,6 @@ jobs:
     steps:
       - uses: docker/setup-buildx-action@v2
       - uses: docker/setup-qemu-action@v3
-        with:
-          platforms: linux/arm64v8
       - uses: actions/checkout@v4
       - name: install deps
         run: dnf install -y git make gcc gcc-c++ glibc bc bison lzo-devel snappy-devel libzstd-devel wget texinfo flex ncurses-devel patch
