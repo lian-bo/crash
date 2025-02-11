@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: install qemu pkgs
-        run: sudo apt-get install qemu binfmt-support qemu-user-static
+        run: sudo apt-get install binfmt-support
       - name: fetch qemu aarch64 static tarball
         run: sudo wget https://github.com/multiarch/qemu-user-static/releases/download/v7.2.0-1/qemu-aarch64-static.tar.gz
       - name: uncompress tarball
