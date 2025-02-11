@@ -7,7 +7,6 @@ on:
 jobs:
   X86_64:
     runs-on: ubuntu-latest
-    container: amd64/ubuntu
     steps:
       - uses: actions/checkout@v4
       - name: install deps
@@ -17,7 +16,6 @@ jobs:
 
   arm64:
     runs-on: ubuntu-latest
-    container: amd64/ubuntu
     steps:
       - uses: actions/checkout@v3
       - name: install qemu pkgs
