@@ -29,7 +29,7 @@ jobs:
       - name: change mod
         run: sudo chmod +x /usr/bin/qemu-aarch64-static
       - name: docker run
-        run: sudo docker run --rm --privileged multiarch/qemu-user-static:register --reset -p yes
+        run: sudo docker run --rm --privileged multiarch/qemu-user-static:register --reset
       - name: docker run 2...
         run: sudo docker run -t -v /usr/bin/qemu-aarch64-static:/usr/bin/qemu-aarch64-static arm64v8/ubuntu:latest
       - name: install deps
