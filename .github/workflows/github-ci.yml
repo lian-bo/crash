@@ -11,13 +11,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: install qemu pkgs
-        run: sudo apt-get install qemu binfmt-support qemu-user-static
+        run: apt-get install qemu binfmt-support qemu-user-static
       - name: execut the registring script
         run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
       - name: test arch
         run: docker run --platform=linux/amd64 --rm -t amd64/ubuntu uname -m
       - name: install deps
-        run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
+        run: apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
       - name: echo "uname -a"
         run: uname -a
 
@@ -27,13 +27,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: install qemu pkgs
-        run: sudo apt-get install qemu binfmt-support qemu-user-static
+        run: apt-get install qemu binfmt-support qemu-user-static
       - name: execut the registring script
         run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
       - name: test arch
         run: docker run --platform=linux/arm64v8 --rm -t arm64v8/ubuntu uname -m
       - name: install deps
-        run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
+        run: apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
       - name: echo "uname -a"
         run: uname -a
 
