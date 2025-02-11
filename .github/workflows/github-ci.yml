@@ -6,8 +6,8 @@ on:
     branches: [ "master" ]
 jobs:
   X86_64:
-    runs-on: ubuntu-latest
-    container: linux/amd64
+    runs-on: fedora:rawhide
+    container: amd64/fedora
     steps:
       - name: set up qemu
         uses: docker/setup-qemu-action@v3
