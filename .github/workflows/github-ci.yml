@@ -10,28 +10,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: install deps
-        run: apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
+        run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
       - name: echo "uname -a"
-        run: uname -a
+        run: sudo uname -a
 
   arm64:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: install qemu pkgs
-        run: wget https://github.com/multiarch/qemu-user-static/releases/download/v7.2.0-1/qemu-aarch64-static.tar.gz
+        run: sudo wget https://github.com/multiarch/qemu-user-static/releases/download/v7.2.0-1/qemu-aarch64-static.tar.gz
       - name: uncompress tarball
-        run: tar -zxvf qemu-aarch64-static.tar.gz
+        run: sudo tar -zxvf qemu-aarch64-static.tar.gz
       - name: copy file
-        run: cp qemu-aarch64-static /usr/bin/
+        run: sudo cp qemu-aarch64-static /usr/bin/
       - name: change mod
-        run: chmod +x /usr/bin/qemu-aarch64-static
+        run: sudo chmod +x /usr/bin/qemu-aarch64-static
       - name: docker run
-        run: docker run --rm --privileged multiarch/qemu-user-static:register --reset
+        run: sudo docker run --rm --privileged multiarch/qemu-user-static:register --reset
       - name: docker run 2...
-        run: docker run -t -v /usr/bin/qemu-aarch64-static:/usr/bin/qemu-aarch64-static arm64v8/ubuntu:latest uname -m
+        run: sudo docker run -t -v /usr/bin/qemu-aarch64-static:/usr/bin/qemu-aarch64-static arm64v8/ubuntu:latest uname -m
       - name: install deps
-        run: apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
+        run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
       - name: echo "uname -a"
-        run: uname -a
+        run: sudo uname -a
 
