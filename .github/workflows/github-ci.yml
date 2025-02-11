@@ -6,42 +6,13 @@ on:
     branches: [ "master" ]
 jobs:
   X86_64:
-    runs-on: ubuntu-latest
+    runs-on: fedora:rawhide
+    container: linux/amd64
     steps:
+      - name: set up qemu
+        uses: docker/setup-qemu-action@v3
       - uses: actions/checkout@v4
       - name: install deps
         run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
-      - name: make
-        run: make -j$(nproc) warn lzo zstd snappy
-  ARM64:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: install deps
-        run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
-      - name: make
-        run: make target=ARM64 -j$(nproc) warn lzo zstd snappy
-  PPC64:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: install deps
-        run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
-      - name: make
-        run: make target=PPC64 -j$(nproc) warn lzo zstd snappy
-  S390X:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: install deps
-        run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
-      - name: make
-        run: make target=S390X -j$(nproc) warn lzo zstd snappy
-  X86:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: install deps
-        run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
-      - name: make
-        run: make target=X86 -j$(nproc) warn lzo zstd snappy
+      - name: echo "uname -a"
+        run: uname -a
