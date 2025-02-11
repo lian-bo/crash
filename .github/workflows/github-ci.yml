@@ -6,7 +6,7 @@ on:
     branches: [ "master" ]
 jobs:
   X86_64:
-    runs-on: fedora:rawhide
+    runs-on: ubuntu-latest
     container: linux/amd64
     steps:
       - name: set up qemu
