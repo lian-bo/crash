@@ -11,6 +11,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: install deps
-        run: sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
+        run: dnf install -y git make gcc gcc-c++ glibc bc bison lzo-devel snappy-devel libzstd-devel wget texinfo flex ncurses-devel patch
+      - name: echo "uname -a"
+        run: uname -a
+
+  arm64:
+    runs-on: ubuntu-latest
+    container: arm64v8/fedora
+    steps:
+      - uses: actions/checkout@v4
+      - name: install deps
+        run: dnf install -y git make gcc gcc-c++ glibc bc bison lzo-devel snappy-devel libzstd-devel wget texinfo flex ncurses-devel patch
       - name: echo "uname -a"
         run: uname -a
