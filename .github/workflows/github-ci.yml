@@ -16,9 +16,10 @@ jobs:
         run: uname -a
 
   arm64:
-    runs-on: ubuntu-latest
+    runs-on: ARM64
     container: arm64v8/fedora
     steps:
+      - uses: docker/setup-buildx-action@v2
       - uses: docker/setup-qemu-action@v3
         with:
           platforms: linux/arm64v8
