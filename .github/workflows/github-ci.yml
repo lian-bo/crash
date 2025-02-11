@@ -9,7 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     container: amd64/ubuntu
     steps:
-      - uses: actions/checkout@v4
+      - name: set up qemu
+        uses: docker/setup-qemu-action@v3
       - name: install qemu pkgs
         run: apt-get install qemu binfmt-support qemu-user-static
       - name: execut the registring script
@@ -20,11 +21,14 @@ jobs:
         run: apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex
       - name: echo "uname -a"
         run: uname -a
+      - uses: actions/checkout@v4
 
   arm64:
     runs-on: ubuntu-latest
     container: arm64v8/ubuntu
     steps:
+      - name: set up qemu
+        uses: docker/setup-qemu-action@v3
       - uses: actions/checkout@v4
       - name: install qemu pkgs
         run: apt-get install qemu binfmt-support qemu-user-static
