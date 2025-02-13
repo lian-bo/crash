@@ -35,7 +35,7 @@ jobs:
 
         case $ARCH in
           arm64)       GNU_ARCH="aarch64-linux-gnu" ;;
-          x86_64)      GNU_ARCH="x86_64-linux-gnu"
+          x86_64)      GNU_ARCH="x86-64-linux-gnu"
                        CROSS_COMPILER_PKG="gcc-12-$GNU_ARCH" ;;
           x86_64-x32)  GNU_ARCH="x86_64-linux-gnux32"
                        CROSS_COMPILER_PKG="gcc-x86-64-linux-gnux32" ;;
