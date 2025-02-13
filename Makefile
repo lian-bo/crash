@@ -58,9 +58,13 @@ else ifeq (${ARCH}, ppc64)
 CONF_DEFAULT_TARGET := PPC64
 else ifeq (${ARCH}, ppc64le)
 CONF_DEFAULT_TARGET := PPC64
+else ifeq (${ARCH}, powerpc64le)
+CONF_DEFAULT_TARGET := PPC64
 else ifeq (${ARCH}, arm)
 CONF_DEFAULT_TARGET := ARM
 else ifeq (${ARCH}, aarch64)
+CONF_DEFAULT_TARGET := ARM64
+else ifeq (${ARCH}, arm64)
 CONF_DEFAULT_TARGET := ARM64
 else ifeq (${ARCH}, mips)
 CONF_DEFAULT_TARGET := MIPS
