@@ -35,7 +35,7 @@ jobs:
 
         case $ARCH in
           arm64)       GNU_ARCH="aarch64-linux-gnu" ;;
-          x86_64)      ;;
+          x86_64)      GNU_ARCH="x86_64-linux-gnu";;
           x86_64-x32)  GNU_ARCH="x86_64-linux-gnux32"
                        CROSS_COMPILER_PKG="gcc-x86-64-linux-gnux32" ;;
           *)           GNU_ARCH="$ARCH-linux-gnu" ;;
@@ -66,4 +66,4 @@ jobs:
 
     - name: Build
       run: |
-        make CROSS_COMPILE=${{ env.GNU_ARCH }}-linux-gnu- -j"$(nproc)" warn lzo zstd snappy
+        make CROSS_COMPILE=${{ env.GNU_ARCH }}- -j"$(nproc)" warn lzo zstd snappy
