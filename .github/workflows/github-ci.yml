@@ -61,4 +61,4 @@ jobs:
 
     - name: Build
       run: |
-        make CROSS_COMPILE=$(GNU_ARCH)-linux-gnu- -j"$(nproc)" warn lzo zstd snappy
+        make CROSS_COMPILE=${{env.GNU_ARCH}}-linux-gnu- -j"$(nproc)" warn lzo zstd snappy
