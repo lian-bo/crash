@@ -46,7 +46,7 @@ ifeq (${ARCH}, i386)
 CONF_DEFAULT_TARGET := X86
 else ifeq (${ARCH}, x86_64)
 CONF_DEFAULT_TARGET := X86_64
-else ifeq($(ARCH), x86-64)
+else ifeq (${ARCH}, x86-64)
 CONF_DEFAULT_TARGET := X86_64
 else ifeq (${ARCH}, ia64)
 CONF_DEFAULT_TARGET := IA64
