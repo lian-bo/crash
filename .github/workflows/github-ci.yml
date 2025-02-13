@@ -12,9 +12,9 @@ jobs:
       matrix:
         arch:
         - arm64
-        - ppc64le
         - s390x
         - i686
+        - powerpc64le
         - x86_64-x32
         include:
           - arch: x86_64
