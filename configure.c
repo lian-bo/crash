@@ -169,7 +169,9 @@ void add_extra_lib(char *);
 #define TARGET_CFLAGS_LOONGARCH64     "TARGET_CFLAGS="
 #define TARGET_CFLAGS_LOONGARCH64_ON_X86_64	"TARGET_CFLAGS="
 
+#ifndef GDB_TARGET_DEFAULT
 #define GDB_TARGET_DEFAULT        "GDB_CONF_FLAGS="
+#endif
 #define GDB_TARGET_ARM_ON_X86     "GDB_CONF_FLAGS=--target=arm-elf-linux"
 #define GDB_TARGET_ARM_ON_X86_64  "GDB_CONF_FLAGS=--target=arm-elf-linux CFLAGS=-m32 CXXFLAGS=-m32"
 #define GDB_TARGET_X86_ON_X86_64  "GDB_CONF_FLAGS=--target=i686-pc-linux-gnu CFLAGS=-m32 CXXFLAGS=-m32"
@@ -376,53 +378,7 @@ get_current_configuration(struct supported_gdb_version *sp)
 	static char buf[512];
 	char *p;
 
-#ifdef __alpha__
-        target_data.target = ALPHA;
-#endif
-#ifdef __i386__
-        target_data.target = X86;
-#endif
-#ifdef __powerpc__
-        target_data.target = PPC;
-#endif
-#ifdef __ia64__
-        target_data.target = IA64;
-#endif
-#ifdef __s390__
-        target_data.target = S390;
-#endif
-#ifdef __s390x__
-        target_data.target = S390X;
-#endif
-#ifdef __powerpc64__
-        target_data.target = PPC64;
-#endif
-#ifdef __x86_64__
-        target_data.target = X86_64;
-#endif
-#ifdef __arm__
-        target_data.target = ARM;
-#endif
-#ifdef __aarch64__
-        target_data.target = ARM64;
-#endif
-#ifdef __mips__
-#ifndef __mips64
-	target_data.target = MIPS;
-#else
-	target_data.target = MIPS64;
-#endif
-#endif
-#ifdef __sparc_v9__
-	target_data.target = SPARC64;
-#endif
-#if defined(__riscv) && (__riscv_xlen == 64)
-	target_data.target = RISCV64;
-#endif
-#ifdef __loongarch64
-	target_data.target = LOONGARCH64;
-#endif
-
+	target_data.target = CONF_DEFAULT_TARGET;
 	set_initial_target(sp);
 
         /* 

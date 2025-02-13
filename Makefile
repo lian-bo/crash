@@ -21,15 +21,61 @@ MAKEFLAGS += --no-print-directory
 PROGRAM=crash
 
 #
-# Supported targets: X86 ALPHA PPC IA64 PPC64 SPARC64
+# Supported targets: X86 X86_64 ARM64 ALPHA PPC IA64 PPC64 SPARC64 S390X
 # TARGET and GDB_CONF_FLAGS will be configured automatically by configure
 #
 TARGET=
 GDB_CONF_FLAGS=
 
-ARCH := $(shell uname -m | sed -e s/i.86/i386/ -e s/sun4u/sparc64/ -e s/arm.*/arm/ -e s/sa110/arm/)
+ifneq ($(CROSS_COMPILE),)
+ARCH := $(shell echo $(CROSS_COMPILE) | sed 's:^.*/::g' | cut -d- -f1)
+else
+ARCH := $(shell uname -m)
+endif
+
+ARCH := $(shell echo $(ARCH) | sed -e s/i.86/i386/ -e s/sun4u/sparc64/ -e s/arm.*/arm/ -e s/sa110/arm/)
+
+CC     = $(CROSS_COMPILE)gcc
+HOSTCC = gcc
+
 ifeq (${ARCH}, ppc64)
-CONF_FLAGS = -m64
+CONF_FLAGS += -m64
+endif
+
+ifeq (${ARCH}, i386)
+CONF_DEFAULT_TARGET := X86
+else ifeq (${ARCH}, x86_64)
+CONF_DEFAULT_TARGET := X86_64
+else ifeq (${ARCH}, ia64)
+CONF_DEFAULT_TARGET := IA64
+else ifeq (${ARCH}, alpha)
+CONF_DEFAULT_TARGET := ALPHA
+else ifeq (${ARCH}, ppc)
+CONF_DEFAULT_TARGET := PPC
+else ifeq (${ARCH}, ppc64)
+CONF_DEFAULT_TARGET := PPC64
+else ifeq (${ARCH}, ppc64le)
+CONF_DEFAULT_TARGET := PPC64
+else ifeq (${ARCH}, arm)
+CONF_DEFAULT_TARGET := ARM
+else ifeq (${ARCH}, aarch64)
+CONF_DEFAULT_TARGET := ARM64
+else ifeq (${ARCH}, mips)
+CONF_DEFAULT_TARGET := MIPS
+else ifeq (${ARCH}, sparc64)
+CONF_DEFAULT_TARGET := SPARC64
+else ifeq (${ARCH}, s390)
+CONF_DEFAULT_TARGET := S390
+else ifeq (${ARCH}, s390x)
+CONF_DEFAULT_TARGET := S390X
+else
+$(error unsupported architecture ${ARCH})
+endif
+
+CONF_FLAGS += -DCONF_DEFAULT_TARGET=${CONF_DEFAULT_TARGET}
+
+ifneq ($(CROSS_COMPILE),)
+CONF_FLAGS += -DGDB_TARGET_DEFAULT="\"GDB_CONF_FLAGS=--target=$(shell echo $(CROSS_COMPILE) | sed -e 's:^.*/::g' -e 's/-$$//')\""
 endif
 
 #
@@ -310,7 +356,7 @@ force:
 
 make_configure: force
 	@rm -f configure
-	@${CC} ${CONF_FLAGS} -o configure configure.c ${WARNING_ERROR} ${WARNING_OPTIONS}
+	@${HOSTCC} ${CONF_FLAGS} -o configure configure.c ${WARNING_ERROR} ${WARNING_OPTIONS}
 
 clean: make_configure
 	@./configure ${CONF_TARGET_FLAG} -q -b
