@@ -13,7 +13,6 @@ jobs:
         arch:
         - arm64
         - s390x
-        - i686
         - powerpc64le
         - x86_64-x32
         include:
