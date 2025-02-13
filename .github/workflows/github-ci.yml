@@ -51,13 +51,14 @@ jobs:
 
         echo "EXTRA_PKGS=$EXTRA_PKGS" >> $GITHUB_ENV
         echo "CONFIG_FLAGS=$CONFIG_FLAGS" >> $GITHUB_ENV
+        echo "GNU_ARCH=$GNU_ARCH" >> $GITHUB_ENV
 
-    - name: Install Deps Tools
+    - name: Install deps
       run: |
         sudo apt-get update
         sudo apt-get install patch gcc g++ liblzo2-dev libsnappy-dev libzstd-dev wget texinfo bison flex 
 
-    - name: Install Deps Pkgs
+    - name: Install extra pkgs
       if: env.EXTRA_PKGS != ''
       run: |
         sudo apt-get update
@@ -65,4 +66,4 @@ jobs:
 
     - name: Build
       run: |
-        make -j"$(nproc)" warn lzo zstd snappy
+        make CROSS_COMPILE=${{ env.GNU_ARCH }}-linux-gnu- -j"$(nproc)" warn lzo zstd snappy
