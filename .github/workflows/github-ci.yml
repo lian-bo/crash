@@ -14,9 +14,7 @@ jobs:
         - arm64
         - s390x
         - powerpc64le
-        - x86_64-x32
-        include:
-          - arch: x86_64
+        - x86_64
 
     steps:
     - name: Checkout
