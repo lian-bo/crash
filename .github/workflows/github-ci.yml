@@ -28,8 +28,7 @@ jobs:
       run: |
         case $ARCH in
           arm64)       GNU_ARCH="aarch64-linux-gnu" ;;
-          x86_64)      GNU_ARCH="gcc-x86-64-linux-gnu"
-                       CROSS_COMPILER_PKG="$GNU_ARCH" ;;
+          x86_64)      CROSS_COMPILE="" ;;
           x86_64-x32)  GNU_ARCH="x86_64-linux-gnux32"
                        CROSS_COMPILER_PKG="gcc-x86-64-linux-gnux32" ;;
           *)           GNU_ARCH="$ARCH-linux-gnu" ;;
@@ -40,10 +39,11 @@ jobs:
             CROSS_COMPILER_PKG="gcc-$GNU_ARCH"
           fi
           EXTRA_PKGS+=" $CROSS_COMPILER_PKG"
+          CROSS_COMPILE="$GNU_ARCH-"
         fi
 
         echo "EXTRA_PKGS=$EXTRA_PKGS" >> $GITHUB_ENV
-        echo "GNU_ARCH=$GNU_ARCH" >> $GITHUB_ENV
+        echo "CROSS_COMPILE=$CROSS_COMPILE" >> $GITHUB_ENV
 
     - name: Install deps
       run: |
@@ -58,4 +58,4 @@ jobs:
 
     - name: Build
       run: |
-        make CROSS_COMPILE=${{ env.GNU_ARCH }}- -j"$(nproc)" warn lzo zstd snappy
+        make CROSS_COMPILE=${{ env.CROSS_COMPILE }} -j"$(nproc)" warn lzo zstd snappy
