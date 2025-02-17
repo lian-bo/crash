@@ -16321,3 +16321,15 @@ exit 0
  rl_sigwinch_handler (int sig)
  {
    SigHandler *oh;
+--- gdb-10.2/configure.orig
++++ gdb-10.2/configure
+@@ -3488,6 +3488,9 @@ case "${target}" in
+     ;;
+ esac
+ 
++#disable gdbserver build in crash-utility
++enable_gdbserver=no
++
+ # Only allow gdbserver on some systems.
+ if test -d ${srcdir}/gdbserver; then
+     if test x$enable_gdbserver = x; then
