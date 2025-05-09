@@ -1,0 +1,16 @@
+summary: Generate vmcore and analyze it with crash tool
+environment:
+  # currently local dumping to /var failes because of bz#2270423
+  # TESTARGS: path /mnt
+  KDUMP_UTILS_RPM: kdump-utils
+discover+:
+    test:
+     - /kdump/default_crashkernel
+     - /kdump/config-any
+     - /kdump/crash-sysrq-c
+#     - /kdump/analyse-crash-cmd/simple_check
+#     - /kdump/makedumpfile-cmd
+#     - /kdump/analyse-dmesg
+     - /kdump/build-crash-utility
+     - /kdump/analyse-crash-cmd/simple_analyse
+
